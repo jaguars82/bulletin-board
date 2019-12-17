@@ -2,7 +2,7 @@
   <v-container>
     <v-layout row>
       <v-flex xs12>
-        <f1>Order</f1>
+        <h1>Order</h1>
       </v-flex>
     </v-layout>
   </v-container>

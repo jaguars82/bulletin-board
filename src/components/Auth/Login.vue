@@ -2,7 +2,7 @@
   <v-container>
     <v-layout row>
       <v-flex xs12>
-        <f1>Login</f1>
+        <h1>Login</h1>
       </v-flex>
     </v-layout>
   </v-container>
