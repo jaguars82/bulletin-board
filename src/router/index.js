@@ -18,7 +18,7 @@ const router = new VueRouter({
       component: Home
     },
     {
-      path: '/ad:id',
+      path: '/ad/:id',
       name: 'ad',
       component: Ad
     },
