@@ -20,7 +20,8 @@ const router = new VueRouter({
     {
       path: '/ad/:id',
       name: 'ad',
-      component: Ad
+      component: Ad,
+      props: true
     },
     {
       path: '/list',

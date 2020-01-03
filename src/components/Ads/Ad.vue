@@ -3,9 +3,9 @@
     <v-row>
       <v-col cols="12">
         <v-card>
-          <v-img src="https://cdn.vuetifyjs.com/images/carousel/sky.jpg" height="300px"></v-img>
-          <v-card-title>Lorem</v-card-title>
-          <v-card-text>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Architecto, possimus!</v-card-text>
+          <v-img :src="ad.imageSrc" height="300px"></v-img>
+          <v-card-title>{{ ad.title }}</v-card-title>
+          <v-card-text>{{ ad.description }}</v-card-text>
           <v-card-actions>
             <v-spacer />
             <v-btn class="warning" text>Edit</v-btn>
@@ -19,8 +19,12 @@
 
 <script>
 export default {
-  data () {
-    return {}
+  props: ['id'],
+  computed: {
+    ad () {
+      const id = this.id
+      return this.$store.getters.adById(id)
+    }
   }
 }
 </script>
