@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
-import * as fb from './firebase'
+import * as fb from 'firebase'
 
 Vue.config.productionTip = false
 
@@ -13,7 +13,7 @@ new Vue({
   vuetify,
   render: h => h(App),
   created () {
-    firebase.initializeApp(
+    fb.initializeApp(
       {
         apiKey: "AIzaSyCYxQZW3xqHWCq3R2Faqdt3IfUbUSSv2Hk",
         authDomain: "ad-project-d0602.firebaseapp.com",
