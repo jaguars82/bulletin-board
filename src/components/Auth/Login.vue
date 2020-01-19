@@ -91,6 +91,11 @@ export default {
           .catch(() => {})
       }
     }
+  },
+  created () {
+    if (this.$route.query['loginError']) {
+      this.$store.dispatch('setError', 'Pease log in to enter this page')
+    }
   }
 }
 </script>
