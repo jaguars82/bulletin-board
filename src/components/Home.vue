@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="!loading">
     <v-container fluid>
       <v-layout row>
         <v-flex xs12>
@@ -19,6 +19,7 @@
         </v-flex>
       </v-layout>
     </v-container>
+
     <v-container>
       <v-row>
         <v-col :cols="cols" v-for="ad of ads" :key="ad.id">
@@ -56,6 +57,21 @@
       </v-row>
     </v-container>
   </div>
+  <div v-else>
+    <v-container>
+      <v-row>
+        <v-col pt-35>
+            <div class="text-center">
+              <v-progress-circular
+                size="100"
+                color="primary"
+                indeterminate
+              ></v-progress-circular>
+            </div>
+        </v-col>
+      </v-row>
+    </v-container>
+  </div>
 </template>
 
 <script>
@@ -74,8 +90,11 @@ export default {
     },
     promoAds () {
       return this.$store.getters.promoAds
+    },
+    loading () {
+      return this.$store.getters.loading
     }
-  }
+  },
 }
 </script>
 

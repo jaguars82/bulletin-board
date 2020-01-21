@@ -53,7 +53,7 @@
     <v-row justify="center">
       <v-col cols="12" sm="8" md="6">
         <v-spacer></v-spacer>
-        <v-btn class="success" :disabled="!valid" @click="createAd">Create ad</v-btn>
+        <v-btn class="success" :loading="loading" :disabled="!valid || loading" @click="createAd">Create ad</v-btn>
       </v-col>
     </v-row>
   </v-container>
@@ -69,6 +69,11 @@ export default {
       valid: false
     }
   },
+  computed: {
+    loading () {
+      return this.$store.getters.loading
+    }
+  },
   methods: {
     createAd () {
       if(this.$refs.form.validate()) {
@@ -80,6 +85,9 @@ export default {
           imageSrc: "https://miro.medium.com/max/1200/1*EM2oYsb4-NzwJ0YqszVaig.png"
         }
         this.$store.dispatch('createAd', ad)
+          .then (() => {
+            this.$router.push('/list')
+          })
       }
     }
   }
