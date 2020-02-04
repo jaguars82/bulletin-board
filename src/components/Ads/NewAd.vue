@@ -29,16 +29,17 @@
         <v-btn
           color="blue-grey"
           class="ma-2 white--text"
-          @click="[]"
+          @click="triggerUpload"
         >
           Upload
           <v-icon right dark>mdi-cloud-upload</v-icon>
         </v-btn>
+        <input type="file" ref="fileInput" accept="image/*" @change="onFileChange" hidden>
       </v-col>
     </v-row>
     <v-row justify="center">
       <v-col cols="12" sm="8" md="6">
-        <img height="100" src="">
+        <img v-if="imageSrc" height="100" :src="imageSrc">
       </v-col>
     </v-row>
     <v-row justify="center">
@@ -53,7 +54,7 @@
     <v-row justify="center">
       <v-col cols="12" sm="8" md="6">
         <v-spacer></v-spacer>
-        <v-btn class="success" :loading="loading" :disabled="!valid || loading" @click="createAd">Create ad</v-btn>
+        <v-btn class="success" :loading="loading" :disabled="!valid || !image || loading" @click="createAd">Create ad</v-btn>
       </v-col>
     </v-row>
   </v-container>
@@ -66,7 +67,9 @@ export default {
       title: '',
       description: '',
       promo: false,
-      valid: false
+      valid: false,
+      image: null,
+      imageSrc: ''
     }
   },
   computed: {
@@ -75,19 +78,33 @@ export default {
     }
   },
   methods: {
+    triggerUpload () {
+      this.$refs.fileInput.click()
+    },
+    onFileChange (event) {
+      const file = event.target.files[0]
+
+      const reader = new FileReader()
+      reader.onload =  e => {
+        this.imageSrc = reader.result
+      }
+      reader.readAsDataURL(file)
+      this.image = file
+    },
     createAd () {
-      if(this.$refs.form.validate()) {
+      if(this.$refs.form.validate() && this.image) {
         //logic
         const ad = {
           title: this.title,
           description: this.description,
           promo: this.promo,
-          imageSrc: "https://miro.medium.com/max/1200/1*EM2oYsb4-NzwJ0YqszVaig.png"
+          image: this.image
         }
         this.$store.dispatch('createAd', ad)
           .then (() => {
             this.$router.push('/list')
           })
+          .catch(() =>{})
       }
     }
   }
