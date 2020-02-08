@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row justify="center">
-      <v-col cols="12" sm="8" md="6">
+      <v-col cols="12" sm="8" md="6" v-if="!loading && myAds.length !== 0">
 
         <h1 class="text--secondary mb-3">My ads</h1>
 
@@ -32,6 +32,16 @@
         </v-card>
 
       </v-col>
+      <v-col cols="12" sm="8" md="6" v-else-if="!loading && myAds.length === 0">
+        <h1 class="text--secondary mb-3">You have no ads</h1>
+      </v-col>
+      <v-col cols="12" sm="8" md="6" v-else>
+        <v-progress-circular
+          size="100"
+          color="primary"
+          indeterminate
+        ></v-progress-circular>
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -41,6 +51,9 @@ export default {
   computed: {
     myAds () {
       return this.$store.getters.myAds
+    },
+    loading () {
+      return this.$store.getters.loading
     }
   }
 }

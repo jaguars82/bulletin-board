@@ -8,8 +8,8 @@
           <v-card-text>{{ ad.description }}</v-card-text>
           <v-card-actions>
             <v-spacer />
-            <app-edit-ad-modal :ad="ad"></app-edit-ad-modal>
-            <v-btn class="success">Buy</v-btn>
+            <app-edit-ad-modal v-if="isOwner" :ad="ad"></app-edit-ad-modal>
+            <app-buy-modal :ad="ad"></app-buy-modal>
           </v-card-actions>
         </v-card>
         <div v-else class="text-center">
@@ -37,6 +37,9 @@ export default {
     },
     loading () {
       return this.$store.getters.loading
+    },
+    isOwner () {
+      return this.ad.ownerId === this.$store.getters.user.id
     }
   },
   components: {

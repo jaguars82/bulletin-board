@@ -45,12 +45,7 @@
                   Open
                 </v-btn>
 
-                <v-btn
-                  class="primary"
-                  raised
-                >
-                  Buy
-                </v-btn>
+                <app-buy-modal :ad="ad"></app-buy-modal>
               </v-card-actions>
             </v-card>
         </v-col>

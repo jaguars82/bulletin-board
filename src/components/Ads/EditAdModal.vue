@@ -62,7 +62,7 @@
         this.modal = false
       },
       onSave () {
-        if (this.editedTitle != '' && this.editedDescription != '') {
+        if (this.editedTitle !== '' && this.editedDescription !== '') {
 
           this.$store.dispatch('editAd', {
             title: this.editedTitle,
